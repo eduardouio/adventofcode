@@ -1,6 +1,5 @@
 import unittest
 from day1 import day_1
-import os
 
 #   Cuando el submarino cae por debajo de la superficie del océano, automáticamente realiza un barrido de sonar del fondo marino cercano.
 #   En una pantalla pequeña, aparece el informe de barrido del sonar(su entrada del rompecabezas): cada línea es una medida de la profundidad del
