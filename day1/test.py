@@ -61,6 +61,27 @@ class TestDia1(unittest.TestCase):
     
     def test_day_4_example(self):
         self.assertEqual(day_1(range(1, 100)), 98)
+        
+    # part 2
+
+    def test_day_1_example1(self):
+        input = [
+            199, 200, 208, 210, 200,
+            207, 240, 269, 260, 263,
+        ]
+        self.assertEqual(day_1(input), 7)
+
+    def test_day_1_example2(self):
+        input = [100, 101, 100, 199, 150,
+                 200, 208, 210, 200, 150,
+                 206, 208, 207, 212, 209,
+                 200, 240, 269, 260, 263,
+                 ]
+
+        self.assertEqual(day_1(input), 11)
+
+    def test_day_4_example_3(self):
+        self.assertEqual(day_1(range(1, 100)), 98)
 
 
 if __name__ == '__main__':
