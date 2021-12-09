@@ -9,8 +9,22 @@ def day_1(input_data) -> int:
         
     return counter
 
+def count_group(input_data):
+    sums = []
+    for key, item in enumerate(input_data):
+        sum = 0
+        for itm in input_data[key:key+2]:
+            sum += im
+    sums.append(sum)
+
+    return day_1(sums)
+
+    import ipdb;ipdb.set_trace()
+
+
 
 path = os.getcwd() + '/day1/input_data.txt'
 input_data = open(path, 'r').read().splitlines()
 input_data = [int(x) for x in input_data]
 print(day_1(input_data))
+print(count_group(input_data))

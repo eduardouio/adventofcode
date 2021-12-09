@@ -1,4 +1,4 @@
-import unittest
+lo loimport unittest
 from day1 import day_1
 
 #   Cuando el submarino cae por debajo de la superficie del océano, automáticamente realiza un barrido de sonar del fondo marino cercano.
@@ -69,7 +69,7 @@ class TestDia1(unittest.TestCase):
             199, 200, 208, 210, 200,
             207, 240, 269, 260, 263,
         ]
-        self.assertEqual(day_1(input), 7)
+        self.assertEqual(day_1(input), 5)
 
     def test_day_1_example2(self):
         input = [100, 101, 100, 199, 150,
