@@ -1,5 +1,6 @@
-lo loimport unittest
+import unittest
 from day1 import day_1
+from day1 import count_group
 
 #   Cuando el submarino cae por debajo de la superficie del océano, automáticamente realiza un barrido de sonar del fondo marino cercano.
 #   En una pantalla pequeña, aparece el informe de barrido del sonar(su entrada del rompecabezas): cada línea es una medida de la profundidad del
@@ -69,7 +70,7 @@ class TestDia1(unittest.TestCase):
             199, 200, 208, 210, 200,
             207, 240, 269, 260, 263,
         ]
-        self.assertEqual(day_1(input), 5)
+        self.assertEqual(count_group(input), 5)
 
     def test_day_1_example2(self):
         input = [100, 101, 100, 199, 150,
@@ -78,10 +79,7 @@ class TestDia1(unittest.TestCase):
                  200, 240, 269, 260, 263,
                  ]
 
-        self.assertEqual(day_1(input), 11)
-
-    def test_day_4_example_3(self):
-        self.assertEqual(day_1(range(1, 100)), 98)
+        self.assertEqual(count_group(input), 13)
 
 
 if __name__ == '__main__':
