@@ -1,5 +1,4 @@
 import os
-from unittest import result
 
 def get_location(data)->int:
     x = y = 0
