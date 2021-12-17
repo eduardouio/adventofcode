@@ -15,38 +15,48 @@ def get_value_energy(input_data):
       
     return (int(t_gama, 2) * int(t_epsilon, 2))
 
-def get_value_common(input_data, position=0 ,most_common = True):
+def get_value_common(input_data, position, most_common):
     data = [list(item) for item in input_data]
     file_numbers= []
-    
-    for k,row in enumerate(data):
-        for col in row:
-            file_numbers.append(col[position])
+    common_bit = None
+    result = []
+
+    for row in data:
+        file_numbers.append(row[position])
             
-    count_bit_0 = file_numbers.count('0')
-    count_bit_1 = file_numbers.count('1')
+    common_bit = '1' if file_numbers.count('1') > file_numbers.count('0') else '0'
+    for row in data:
+        if most_common:
+            result.append(row if row[position] == common_bit else None)
+        else:
+            result.append(row if row[position] != common_bit else None)
     
-    import ipdb; ipdb.set_trace()
-    
-    if most_common:
-        return '1' if count_bit_1 > count_bit_0 else '0'
-    
-    return '1' if count_bit_1 < count_bit_0 else '0'
-        
-    
-    base = [list(i) for i in data]
-        
-        # TODO
-        # Hace tomar el valor por nuemros de 5 bits, solamente hacer la lista para buscar el mas comun 
-        # con el count, luego de tomar el mas comuno retorar todos los valores de esa fila.
-        if column[position].count('1') > (len(input_data)//2):
-            common_value = '1'
-        
-      
-    return '10111'
+    result = [''.join(r) for r in result if r is not None]
+    return result
 
 def get_vital_support(input_data):
-    return 230
+    o2_nominal_value = None
+    co2_depuration_value = None
+
+    for position in range(0, len(input_data[0]) - 1):
+        if position == 0:
+            data = input_data
+        
+        data = get_value_common(data, position, True)
+        
+        # TODO
+        # DEfinir solamente el mas commun, deberia hacerce en la de most_common
+        
+        
+    return data
+        
+        
+    
+    
+    return(int(o2_nominal_value, 2) * int(co2_depuration_value, 2))
+    
+    
+    
 
 path = os.getcwd() + '/day3/input_data.txt'
 input_data = open(path, 'r').read().splitlines()

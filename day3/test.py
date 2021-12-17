@@ -23,12 +23,40 @@ class test_day3(unittest.TestCase):
         self.assertEqual(get_value_energy(self.input_data), 198)
     
     def test_get_value_most_common(self):
-        self.assertEqual(get_value_common(self.input_data), '10111')
-        
-    def test_get_value_fewer_common(self):
-        self.assertEqual(get_value_common(self.input_data), '10111')
+        spected_data = [
+            '11110',
+            '10110',
+            '10111',
+            '10101',
+            '11100',
+            '10000',
+            '11001',
+        ]
+        self.assertListEqual(get_value_common(self.input_data, 0, True), spected_data)
+    
+    def test_get_value_not_comon(self):
+        spected_data = [
+            '00100',
+            '01111',
+            '00111',
+            '00010',
+            '01010',
+        ]
+        self.assertListEqual(get_value_common(self.input_data, 0, False), spected_data)
+    
+    def test_get_most_common_lastp(self):
+        spected_data = [
+            '00100',
+            '11110',
+            '10110',
+            '11100',
+            '10000',
+            '00010',
+            '01010',
+        ]
+        self.assertListEqual(get_value_common(self.input_data, 4, True), spected_data)
 
-    def test_get_vital_support(self):
+    def test_get_gama(self):
         self.assertEqual(get_vital_support(self.input_data), 230)
       
 if __name__ == '__main__':
