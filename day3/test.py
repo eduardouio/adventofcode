@@ -1,5 +1,5 @@
 import unittest
-from day3 import get_value_energy, get_vital_support
+from day3 import get_value_energy, get_vital_support, get_value_common
 
 class test_day3(unittest.TestCase):
     
@@ -21,7 +21,12 @@ class test_day3(unittest.TestCase):
         
     def test_get_value_example1(self): 
         self.assertEqual(get_value_energy(self.input_data), 198)
+    
+    def test_get_value_most_common(self):
+        self.assertEqual(get_value_common(self.input_data), '10111')
         
+    def test_get_value_fewer_common(self):
+        self.assertEqual(get_value_common(self.input_data), '10111')
 
     def test_get_vital_support(self):
         self.assertEqual(get_vital_support(self.input_data), 230)
