@@ -32,7 +32,10 @@ class test_day3(unittest.TestCase):
             '10000',
             '11001',
         ]
-        self.assertListEqual(get_value_common(self.input_data, 0, True), spected_data)
+        self.assertListEqual(get_value_common(
+            self.input_data, 0, True),
+            spected_data
+        )
     
     def test_get_value_not_comon(self):
         spected_data = [
@@ -42,7 +45,10 @@ class test_day3(unittest.TestCase):
             '00010',
             '01010',
         ]
-        self.assertListEqual(get_value_common(self.input_data, 0, False), spected_data)
+        self.assertListEqual(get_value_common(
+            self.input_data, 0, False),
+            spected_data
+        )
     
     def test_get_most_common_lastp(self):
         spected_data = [
@@ -54,10 +60,55 @@ class test_day3(unittest.TestCase):
             '00010',
             '01010',
         ]
-        self.assertListEqual(get_value_common(self.input_data, 4, True), spected_data)
-
-    def test_get_gama(self):
-        self.assertEqual(get_vital_support(self.input_data), 230)
+        self.assertListEqual(
+            get_value_common(self.input_data, 4, True),
+            spected_data
+        )
+        
+    def test_improbable_input_most_common(self):
+        improblable_input_1 = [
+            '01010',
+        ] 
+        
+        improbable_input_2 = [
+            '00000',
+            '11111',
+        ]
+        
+        improbable_input_3 = [
+            '11111',
+            '11111',
+        ]
+        
+        improblable_input_4 = [
+            '01111',
+            '01010'
+        ]
+        
+        self.assertListEqual(
+            get_value_common(improblable_input_1, 0, True),
+            ['01010']
+        )
+        
+        self.assertListEqual(
+            get_value_common(improbable_input_2, 0, True),
+            ['11111']
+        )
+        
+        self.assertListEqual(
+            get_value_common(improbable_input_3, 0, True),
+            ['11111', '11111']
+        )
+        
+        self.assertEqual(
+            get_value_common(improblable_input_4, 2, False),
+            ['01010']
+        )
+        
+        
+    def test_get_oxigen(self):
+        self.assertEqual(get_vital_support(self.input_data), '01010')
+    
       
 if __name__ == '__main__':
     unittest.main()

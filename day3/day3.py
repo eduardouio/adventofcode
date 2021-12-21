@@ -18,47 +18,65 @@ def get_value_energy(input_data):
 def get_value_common(input_data, position, most_common):
     data = [list(item) for item in input_data]
     file_numbers= []
+    equals = False
     common_bit = None
     result = []
 
     for row in data:
         file_numbers.append(row[position])
-            
-    common_bit = '1' if file_numbers.count('1') > file_numbers.count('0') else '0'
+    
+    if file_numbers.count('1') > file_numbers.count('0'):
+        common_bit = '1'
+    elif file_numbers.count('1') < file_numbers.count('0'):
+        common_bit = '0'
+    elif file_numbers.count('1') == file_numbers.count('0'):
+        common_bit = '1' if most_common else '0'
+        equals = True
+        
+    if equals and data.__len__() == 2:
+        result = data[0] if data[0][position] == common_bit else data[1]
+        return([''.join(result)])
+        
     for row in data:
         if most_common:
             result.append(row if row[position] == common_bit else None)
         else:
             result.append(row if row[position] != common_bit else None)
-    
+        
     result = [''.join(r) for r in result if r is not None]
+    
+
+    
     return result
 
 def get_vital_support(input_data):
     o2_nominal_value = None
     co2_depuration_value = None
 
-    for position in range(0, len(input_data[0]) - 1):
+    for position in range(0, len(input_data[0])):
         if position == 0:
             data = input_data
         
         data = get_value_common(data, position, True)
-        
-        # TODO
-        # DEfinir solamente el mas commun, deberia hacerce en la de most_common
-        
-        
-    return data
-        
-        
+
+        if data.__len__() == 1:
+            o2_nominal_value = data[0]
     
+    for position in range(0, len(input_data[0])):
+        if position == 0:
+            data = input_data
+
+        data = get_value_common(data, position, False)
+        
+        if data.__len__() == 1:
+            co2_depuration_value = data[0]
     
-    return(int(o2_nominal_value, 2) * int(co2_depuration_value, 2))
-    
-    
-    
+    return (co2_depuration_value, o2_nominal_value)
+
 
 path = os.getcwd() + '/day3/input_data.txt'
 input_data = open(path, 'r').read().splitlines()
 
+o2, co2 = get_vital_support(input_data)
 print(get_value_energy(input_data))
+print(int(o2, 2) * int(co2, 2))
