@@ -71,12 +71,10 @@ def get_vital_support(input_data):
         if data.__len__() == 1:
             co2_depuration_value = data[0]
     
-    return (co2_depuration_value, o2_nominal_value)
+    return (int(co2_depuration_value, 2) * int(o2_nominal_value,2))
 
 
 path = os.getcwd() + '/day3/input_data.txt'
 input_data = open(path, 'r').read().splitlines()
-
-o2, co2 = get_vital_support(input_data)
 print(get_value_energy(input_data))
-print(int(o2, 2) * int(co2, 2))
+print(get_vital_support(input_data))
