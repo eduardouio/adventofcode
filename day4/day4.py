@@ -1,3 +1,4 @@
+import os
 from more_itertools import chunked
 
 
@@ -5,6 +6,7 @@ class Bingo():
 
     def __init__(self, input_data):
         self.tables = []
+        self.win_table = None
         self.shadow_tables = []
         self.entries = []
 
@@ -35,30 +37,58 @@ class Bingo():
                     col = row.index(entry)
                     self.shadow_tables[tbl][rw][col] = 1
     
-    def run_entries(self):
+    def run_entries(self, last=False):
+        last_entry = None
+        value = 0
+        
         for entry in self.entries:
             self.mark_shadow(entry)
-            if self.bingo():
-                return self.get_value()
+            if last:
+              results = self.check_bingo(last=True, enrty=entry)
+              
+            else:
+                if self.check_bingo():
+                    last_entry = entry
+                    break
         
-        return False
+        if self.win_table:
+            for x,row in enumerate(self.shadow_tables[self.win_table]):
+                for y,col in enumerate(row):
+                    if not col:
+                        value += self.tables[self.win_table][x][y]
+            value = value * last_entry
+            
+        return value
 
-    def bingo(self):
-        for table in self.shadow_tables:
+    def check_bingo(self, last=False, enrty=None):
+        tables_win = []
+        
+        for i,table in enumerate(self.shadow_tables):
             for row in table:
                 if all(row):
-                    return True
+                    if last:
+                        tables_win.append([i,enrty])
+                    else:
+                        self.win_table = i
+                        return True
                 
-        columns = [list(x) for x in zip(*self.shadow_tables)]
-        columns = [[_[0]][0] for _ in columns]
+            columns = [list(x) for x in zip(*table)]
+            for col in columns:
+                    if all(col):
+                        if last:
+                            tables_win.append([i, enrty])
+                        else:
+                            self.win_table = i
+                            return True
+        if last:
+            import ipdb; ipdb.set_trace()
+            return tables_win
         
-        for col in columns:
-                if all(col):
-                    return True
-        
-        import ipdb; ipdb.set_trace()
+        self.win_table = None
         return False
-    
-    
-    def get_value(self):
-        pass
+
+
+path = os.getcwd() + '/day4/input_data.txt'
+input_data = open(path, 'r').read()
+bingo = Bingo(input_data)
+print(bingo.run_entries())

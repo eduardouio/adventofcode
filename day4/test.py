@@ -110,7 +110,7 @@ class TestDay4(unittest.TestCase):
         self.bingo.run_entries()
         self.assertListEqual(spected_shadow[0][0], self.bingo.shadow_tables[0][0])
 
-    def test_bingo(self):
+    def test_check_bingo(self):
         shadow_false = [[
                 [0, 0, 1, 1, 1],
                 [0, 1, 1, 1, 0],
@@ -135,11 +135,26 @@ class TestDay4(unittest.TestCase):
                 [1, 1, 1, 1, 1]
         ]]
         
-        self.bingo.shadow_tables = shadow_false
-        self.assertFalse(self.bingo.bingo())
-        
         self.bingo.shadow_tables = shadow_true_vertical
-        self.assertTrue(self.bingo.bingo())
+        self.assertTrue(self.bingo.check_bingo())
+        self.assertEqual(self.bingo.win_table, 0)
+        
+        self.bingo.shadow_tables = shadow_true_horizontal
+        self.assertTrue(self.bingo.check_bingo())
+        self.assertEqual(self.bingo.win_table, 0)
+        
+        self.bingo.shadow_tables = shadow_false
+        self.assertFalse(self.bingo.check_bingo())
+        self.assertIsNone(self.bingo.win_table)
+    
+    def test_bingo_game(self):
+        res = self.bingo.run_entries()
+        self.assertEqual(res, 4512)
+    
+    def test_last_bingo(self):
+        res = self.bingo.run_entries(last=True)
+        self.assertEqual(res, 1924)
+    
 
 if __name__ == '__main__':
     unittest.main()

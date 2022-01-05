@@ -107,7 +107,7 @@ class test_day3(unittest.TestCase):
         
         
     def test_get_oxigen(self):
-        self.assertEqual(get_vital_support(self.input_data), '01010')
+        self.assertEqual(get_vital_support(self.input_data), 230)
     
       
 if __name__ == '__main__':
